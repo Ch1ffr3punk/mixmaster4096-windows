@@ -1,0 +1,24 @@
+$remailer{"dizum"} = "<remailer@dizum.com> cpunk max mix pgp pgponly repgp remix latent hash cut test ek ekx esub inflt50 rhop5 reord post klen64";
+$remailer{"frannie"} = "<mix@franxial.com> cpunk max mix middle pgp pgponly repgp remix esubbf hsub latent hash cut test ekx inflt50 rhop5 reord post klen1024";
+$remailer{"frell"} = "<godot@remailer.frell.eu.org> cpunk max mix pgp pgponly repgp remix latent hash cut test ekx inflt50 rhop5 reord post klen1024";
+$remailer{"paranoia"} = "<mixmaster@remailer.paranoici.org> cpunk max mix pgp pgponly repgp remix esubbf hsub latent hash cut test ekx inflt50 rhop5 reord post";
+$remailer{"senshi"} = "<senshiremailer@gmx.de> cpunk middle pgp latent ek ekx esub cut hash repgp reord ext max test inflt10 rhop2 klen200";
+$remailer{"yeahno"} = "<mix@yeahno.net> cpunk max mix middle pgp pgponly repgp remix esubbf hsub latent hash cut test ekx inflt50 rhop5 reord post";
+
+Broken type-I remailer chains:
+(* senshi)
+(frell *)
+(senshi *)
+
+Broken type-II remailer chains:
+
+
+Last update: Thu 05 Feb 2026 19:55:00 GMT
+remailer  email address                        history  latency  uptime
+-----------------------------------------------------------------------
+dizum    remailer@dizum.com               ************    18:00 100.00%
+frannie  mix@franxial.com                 ************    16:30 100.00%
+frell    godot@remailer.frell.eu.org      ************    34:00 100.00%
+yeahno   mix@yeahno.net                   ************    14:30 100.00%
+paranoia mixmaster@remailer.paranoici.org +*+++****_.-  1:15:00  84.36%
+senshi   senshiremailer@gmx.de            -__.-+++++++  3:12:30  50.79%

@@ -1,0 +1,19 @@
+
+Broken type-I remailer chains:
+(* senshi)
+(frell *)
+(senshi *)
+
+Broken type-II remailer chains:
+
+Last update: Thu 05 Feb 2026 19:55:00 GMT
+mixmaster           history  latency  uptime
+--------------------------------------------
+frannie        ************    20:00 100.00%
+frell          ************    34:00 100.00%
+frell2         ************    31:00 100.00%
+iria                      *    16:30 100.00%
+middleman      ********#***    10:00 100.00%
+yeahno         ************    21:00 100.00%
+dizum          ************    16:00  99.45%
+paranoia       *+****+++_.-  1:08:00  85.03%
