@@ -1,0 +1,62 @@
+#  A L L   P I N G E R S'   I N D E X
+#
+# Updated: Fri, 31 Oct 2025
+# This list was last updated by SEC3
+# Please email corrections/issues to: admin@sec3.net
+#
+
+[archiade]
+base        = https://archiade.net/echolot/
+rlist       = https://archiade.net/echolot/rlist.txt
+mlist       = https://archiade.net/echolot/mlist.txt
+rlist2      = https://archiade.net/echolot/rlist2.txt
+mlist2      = https://archiade.net/echolot/mlist2.txt
+rlist_html  = https://archiade.net/echolot/rlist.html
+mlist_html  = https://archiade.net/echolot/mlist.html
+rlist2_html = https://archiade.net/echolot/rlist2.html
+mlist2_html = https://archiade.net/echolot/mlist2.html
+pgpring     = https://archiade.net/echolot/pgp-all.asc
+pgpring_rsa = https://archiade.net/echolot/pgp-rsa.asc
+mixring     = https://archiade.net/echolot/pubring.mix
+type2list   = https://archiade.net/echolot/type2.list
+
+[frell]
+base        = http://echolot.theremailer.net/sideview/
+rlist       = http://echolot.theremailer.net/sideview/rlist.txt
+mlist       = http://echolot.theremailer.net/sideview/mlist.txt
+rlist2      = http://echolot.theremailer.net/sideview/rlist2.txt
+mlist2      = http://echolot.theremailer.net/sideview/mlist2.txt
+rlist_html  = http://echolot.theremailer.net/sideview/rlist.html
+mlist_html  = http://echolot.theremailer.net/sideview/mlist.html
+rlist2_html = http://echolot.theremailer.net/sideview/rlist2.html
+mlist2_html = http://echolot.theremailer.net/sideview/mlist2.html
+pgpring     = http://echolot.theremailer.net/sideview/pgp-all.asc
+pgpring_rsa = http://echolot.theremailer.net/sideview/pgp-rsa.asc
+mixring     = http://echolot.theremailer.net/sideview/pubring.mix
+type2list   = http://echolot.theremailer.net/sideview/type2.list
+
+[sec3]
+base        = https://www.sec3.net/stats/
+rlist       = https://www.sec3.net/stats/rlist.txt
+mlist       = https://www.sec3.net/stats/mlist.txt
+rlist2      = https://www.sec3.net/stats/rlist2.txt
+mlist2      = https://www.sec3.net/stats/mlist2.txt
+rlist_html  = https://www.sec3.net/stats/rlist.html
+mlist_html  = https://www.sec3.net/stats/mlist.html
+rlist2_html = https://www.sec3.net/stats/rlist2.html
+mlist2_html = https://www.sec3.net/stats/mlist2.html
+pgpring     = https://www.sec3.net/stats/pgp-all.asc
+pgpring_rsa = https://www.sec3.net/stats/pgp-rsa.asc
+mixring     = https://www.sec3.net/stats/pubring.mix
+type2list   = https://www.sec3.net/stats/type2.list
+
+[senshi]
+base        = http://senshiweb.webhop.net/
+rlist2      = http://senshiweb.webhop.net/rlist2.txt
+mlist2      = http://senshiweb.webhop.net/mlist2.txt
+mlist_html  = http://senshiweb.webhop.net/mlist.html
+rlist_html  = http://senshiweb.webhop.net/rlist.html
+mixring     = http://senshiweb.webhop.net/pubring.mix
+type2list   = http://senshiweb.webhop.net/type2.lis
+
+
