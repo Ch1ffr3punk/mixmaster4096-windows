@@ -1,3 +1,10 @@
 # mixmaster4096-windows
 
 To set the path for mix.exe in the current directory, use: set MIX3PATH=.\  
+
+Additional utilities:
+
+sendmail.exe, because Richard's Mixmaster 3.1 produces only outfiles.
+mip.exe - convert .jpeg or .png images to proper MIME base64 encoded  
+email messages or Usenet postings.  
+mse.exe - convert Subject: conten with UTF-8 characters to MIME base64.  
