@@ -7,4 +7,4 @@ Additional utilities:
 sendmail.exe - because Richard's Mixmaster 3.1 produces only outfiles.  
 mip.exe - convert .jpeg or .png images to proper MIME base64 encoded    
 email messages or Usenet postings.   
-mse.exe - convert Subject: conten with UTF-8 characters to MIME base64.  
+mse.exe - convert Subject: content with UTF-8 characters to MIME base64.  
