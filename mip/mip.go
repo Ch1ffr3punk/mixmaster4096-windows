@@ -11,31 +11,26 @@ import (
 )
 
 const (
-	// alphanumeric characters for random strings (now including uppercase)
 	alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 	filenameLen  = 12
 	boundaryLen  = 24
-	lineWidth    = 76 // RFC 2045: MIME base64 lines should not exceed 76 characters
+	lineWidth    = 76
 	crlf         = "\r\n"
-	dashes       = "--------------" // Exactly 14 dashes
+	dashes       = "--"
 )
 
-// generateRandomString creates a random n-character alphanumeric string
 func generateRandomString(n int) (string, error) {
 	bytes := make([]byte, n)
 	_, err := rand.Read(bytes)
 	if err != nil {
 		return "", err
 	}
-
 	for i := 0; i < n; i++ {
 		bytes[i] = alphanumeric[int(bytes[i])%len(alphanumeric)]
 	}
-
 	return string(bytes), nil
 }
 
-// lineBreaker wraps an io.Writer and inserts CRLF every lineWidth characters
 type lineBreaker struct {
 	w       io.Writer
 	lineLen int
@@ -75,34 +70,29 @@ func printUsage() {
 }
 
 func main() {
-	// Define command line parameters
 	to := flag.String("t", "", "To: address (email recipient)")
 	subject := flag.String("s", "", "Subject: line")
 	newsgroups := flag.String("n", "", "Newsgroups: (optional, for Usenet posts)")
 	help := flag.Bool("h", false, "Show help")
 	helpLong := flag.Bool("help", false, "Show help")
 	
-	// Custom usage function
 	flag.Usage = func() {
 		printUsage()
 	}
 	
 	flag.Parse()
 
-	// Check for help flag
 	if *help || *helpLong {
 		printUsage()
 		os.Exit(0)
 	}
 
-	// Check if stdin has data (not a terminal)
 	stat, _ := os.Stdin.Stat()
 	if (stat.Mode() & os.ModeCharDevice) != 0 {
 		printUsage()
 		os.Exit(1)
 	}
 
-	// Read entire input from stdin
 	data, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading input: %v\r\n", err)
@@ -114,17 +104,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Detect file type based on magic numbers
 	var contentType, extension string
-	
-	// PNG signature: 89 50 4E 47 0D 0A 1A 0A
 	if len(data) >= 8 && data[0] == 0x89 && data[1] == 0x50 && data[2] == 0x4E && 
 		data[3] == 0x47 && data[4] == 0x0D && data[5] == 0x0A && 
 		data[6] == 0x1A && data[7] == 0x0A {
 		contentType = "image/png"
 		extension = ".png"
 	} else if len(data) >= 2 && data[0] == 0xFF && data[1] == 0xD8 {
-		// JPEG/JFIF signature starts with FF D8
 		contentType = "image/jpeg"
 		extension = ".jpg"
 	} else {
@@ -132,15 +118,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Generate random strings for boundary and filename
 	boundarySuffix, err := generateRandomString(boundaryLen)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error generating boundary: %v\r\n", err)
 		os.Exit(1)
 	}
 
-	// Complete boundary = 14 dashes + random string
-	fullBoundary := dashes + boundarySuffix
+	boundary := boundarySuffix
 
 	filename, err := generateRandomString(filenameLen)
 	if err != nil {
@@ -150,67 +134,55 @@ func main() {
 
 	fullFilename := filename + extension
 
-	// Write headers and encoded data to stdout
 	writer := bufio.NewWriter(os.Stdout)
 	defer writer.Flush()
 
-	// Write headers with CRLF line endings (RFC 822/2822 requirement)
-	
-	// To: header (always write, even if empty for Usenet)
+	// Header
 	writer.WriteString("To: ")
 	writer.WriteString(*to)
 	writer.WriteString(crlf)
 
-	// Subject: header (always write, even if empty)
 	writer.WriteString("Subject: ")
 	writer.WriteString(*subject)
 	writer.WriteString(crlf)
 
-	// Newsgroups: header (write only if provided)
 	if *newsgroups != "" {
 		writer.WriteString("Newsgroups: ")
 		writer.WriteString(*newsgroups)
 		writer.WriteString(crlf)
 	}
 
-	// Multipart MIME headers
 	writer.WriteString("MIME-Version: 1.0")
 	writer.WriteString(crlf)
 	
 	writer.WriteString("Content-Type: multipart/mixed; boundary=\"")
-	writer.WriteString(fullBoundary)
+	writer.WriteString(boundary)
 	writer.WriteString("\"")
 	writer.WriteString(crlf)
 	
-	// Blank line separating headers and body
 	writer.WriteString(crlf)
-
-	// Multipart message body
+	
 	writer.WriteString("This is a multi-part message in MIME format.")
 	writer.WriteString(crlf)
 	
-	// First boundary (text part) - with 14 dashes
-	writer.WriteString(fullBoundary)
+	writer.WriteString("--")
+	writer.WriteString(boundary)
 	writer.WriteString(crlf)
 	
-	// Text part headers
-	writer.WriteString("Content-Type: text/plain; charset=UTF-8; format=flowed")
+	writer.WriteString("Content-Type: text/plain; charset=UTF-8")
 	writer.WriteString(crlf)
 	writer.WriteString("Content-Transfer-Encoding: 7bit")
 	writer.WriteString(crlf)
-	
-	// Blank line before text content
 	writer.WriteString(crlf)
 	
-	// Text content with placeholder
 	writer.WriteString("(Your message goes here.)")
 	writer.WriteString(crlf)
 	
-	// Second boundary (image part) - with 14 dashes
-	writer.WriteString(fullBoundary)
+	writer.WriteString("--")
+	writer.WriteString(boundary)
 	writer.WriteString(crlf)
 	
-	// Image part headers
+	// Bildteil
 	writer.WriteString("Content-Type: ")
 	writer.WriteString(contentType)
 	writer.WriteString("; name=\"")
@@ -225,11 +197,9 @@ func main() {
 	
 	writer.WriteString("Content-Transfer-Encoding: base64")
 	writer.WriteString(crlf)
-	
-	// Blank line before base64 data
 	writer.WriteString(crlf)
 
-	// Encode image data to base64 with line wrapping
+	// Base64-encoded image data
 	encoder := base64.NewEncoder(base64.StdEncoding, &lineBreaker{w: writer})
 	_, err = encoder.Write(data)
 	if err != nil {
@@ -238,9 +208,9 @@ func main() {
 	}
 	encoder.Close()
 
-	// Final boundary to end the multipart message - with 14 dashes and two extra dashes
 	writer.WriteString(crlf)
-	writer.WriteString(fullBoundary)
+	writer.WriteString("--")
+	writer.WriteString(boundary)
 	writer.WriteString("--")
 	writer.WriteString(crlf)
 }
