@@ -108,7 +108,7 @@ func main() {
 		}
 		successCount := downloadStatisticsViaProxy(config.Sources, config.StatsInterval, *vFlag)
 		if successCount == 0 && len(config.Sources) > 0 {
-			fmt.Fprintf(os.Stderr, "sendmail: Warning: No statistics files downloaded (may be due to interval)\n")
+			fmt.Fprintf(os.Stderr, "sendmail: No statistics files downloaded\n")
 		} else if *vFlag {
 			fmt.Fprintf(os.Stderr, "sendmail: Downloaded %d/%d files via proxy\n", successCount, len(config.Sources))
 		}
@@ -348,7 +348,7 @@ https://archiade.net/echolot/pgp-all.asc
 mailrelay.archiade.net
 
 [SMTPPort]
-2525
+587
 
 [ProxyPort]
 9050
@@ -373,7 +373,7 @@ Interval = 6h`
 			"https://archiade.net/echolot/pgp-all.asc",
 		},
 		SMTPRelay:     "mailrelay.archiade.net",
-		SMTPPort:      "2525",
+		SMTPPort:      "587",
 		ProxyPort:     "9050",
 		StatsInterval: 6 * time.Hour, // Default: 6 hours
 	}, nil
@@ -589,7 +589,7 @@ func readEmailIntoBuffer(r io.Reader) (*EmailData, error) {
 func sendEmailViaProxy(smtpAddr, from string, to []string, message []byte, verbose bool) error {
 	// Extract host and port from SMTP address
 	host := smtpAddr
-	port := "2525"
+	port := "587"
 	if strings.Contains(smtpAddr, ":") {
 		parts := strings.SplitN(smtpAddr, ":", 2)
 		if len(parts) == 2 {
@@ -789,7 +789,7 @@ Example sendmail.cfg:
   mailrelay.archiade.net
   
   [SMTPPort]
-  2525
+  587
   
   [ProxyPort]
   9050
